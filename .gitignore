@@ -1,0 +1,98 @@
+# Arquivos Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Arquivos do ambiente virtual (se você estiver usando um)
+venv/
+env/
+*.env
+
+# Arquivos de configuração específicos do sistema
+*.sqlite3
+*.log
+
+# Arquivos de configuração do Django
+*.pyc
+db.sqlite3
+*.log
+*.pot
+*.pyo
+__pycache__/
+local_settings.py
+settings.py
+migrations/
+*.db
+
+# Arquivos de mídia e uploads
+media/
+uploads/
+
+# Dependências geradas
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Arquivos de log
+*.log
+
+# Cache de testes do Django
+__pycache__/
+.cached/
+.coverage
+htmlcov/
+
+# Diretório de build
+build/
+
+# Ambiente de produção
+.env.prod
+.prod/
+
+# Chaves SSH (adicione o nome de sua chave caso não corresponda aos abaixo)
+id_rsa
+projeto_es
+id_ed25519
+*.pub
+
+# Arquivos de token
+.token
+*.pem
+
+# Configuração SSH
+config
+
+# Banco de dados MySQL
+*.mysql
+*.mysql.bak
+
+# Arquivos de backup temporários do Vim
+*~
+
+# Arquivos de swap do Vim
+.swp
+.swx
+*.swp
+
+# Arquivos de informação do Vim
+.viminfo
+
+# Diretório de configuração do PyCharm
+.idea/
+
+# Arquivos de configuração do PyCharm
+*.iml
+*.iws
+*.ipr
+*.ids
+
+# Diretório de configuração do VSCode
+.vscode/
+
+# Configurações de usuário do VSCode
+.vscode/settings.json
+
+# Arquivos de estado do VSCode
+.vscode/state.vscdb
+.vscode/state.vscdb.lock
+
