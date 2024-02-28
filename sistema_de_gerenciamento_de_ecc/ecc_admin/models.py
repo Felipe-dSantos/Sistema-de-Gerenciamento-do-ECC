@@ -67,7 +67,7 @@ class MembroIgreja(models.Model):
     cpf = models.CharField(max_length=11, unique=True)
     primeiro_nome = models.CharField(max_length=20, validators=[MinLengthValidator(2)])
     segundo_nome = models.CharField(max_length=40, validators=[MinLengthValidator(2)])
-    nascimento = models.DateTimeField()
+    nascimento = models.DateField()
     sexo = models.CharField(max_length=1, choices=SEXO)
     endereco = models.ForeignKey(Endereco, on_delete=models.SET_NULL, null=True)
     contato = models.ForeignKey(Contato, on_delete=models.SET_NULL, null=True)
@@ -89,7 +89,7 @@ class Casal(models.Model):
     cpf_marido = models.ForeignKey(MembroIgreja, on_delete=models.CASCADE, related_name='marido')
     cpf_esposa = models.ForeignKey(MembroIgreja, on_delete=models.CASCADE, related_name='esposa')
     id = models.CharField(max_length=22, primary_key=True)  # 11 para cpf_marido and 11 para cpf_esposa
-    data_casamento = models.DateTimeField()
+    data_casamento = models.DateField()
     status_casal_ecc = models.CharField(max_length=7, choices=STATUS_CASAL_ECC)
     status_matrimonio = models.CharField(max_length=10, choices=STATUS_MATRIMONIO)
     data_cadastro_casal = models.DateTimeField(auto_now_add=True)
