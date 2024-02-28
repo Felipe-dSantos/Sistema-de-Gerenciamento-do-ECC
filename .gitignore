@@ -20,7 +20,8 @@ db.sqlite3
 *.pyo
 __pycache__/
 local_settings.py
-settings2.py
+settings.py
+settings22.py
 migrations/
 *.db
 
