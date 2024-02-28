@@ -1,0 +1,7 @@
+asgiref==3.7.2
+Django==4.2.9
+greenlet==3.0.3
+mysqlclient==1.4.3
+pkg_resources==0.0.0
+sqlparse==0.4.4
+typing_extensions==4.9.0
