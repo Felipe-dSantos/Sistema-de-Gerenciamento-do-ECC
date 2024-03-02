@@ -24,7 +24,7 @@ python -m venv venv
 
  Algumas informações úteis sobre comandos importantes do Django.
 
-Instale as dependências do projeto:
+###Instale as dependências do projeto:
 
 ```
 pip install -r requirements.txt
