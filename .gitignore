@@ -22,7 +22,7 @@ __pycache__/
 local_settings.py
 # settings.py
 settings22.py
-# migrations/
+migrations/
 *.db
 
 # Arquivos de mídia e uploads
