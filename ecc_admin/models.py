@@ -2,12 +2,7 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from uuid import uuid4
 
-
-
-
 class Endereco(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-     
     ESTADOS_BRASILEIROS = (
         ('AC', 'Acre'),
         ('AL', 'Alagoas'),
@@ -50,7 +45,6 @@ class Endereco(models.Model):
 
 
 class Contato(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     telefone = models.CharField(max_length=11, null=True)
     email = models.EmailField(max_length=100, null=True)
     data_registro = models.DateTimeField(auto_now_add=True)
@@ -63,7 +57,7 @@ class MembroIgreja(models.Model):
         ('F', 'Feminino'),
         ('M', 'Masculino'),
     )
-
+    
     cpf = models.CharField(max_length=11, unique=True)
     primeiro_nome = models.CharField(max_length=20, validators=[MinLengthValidator(2)])
     segundo_nome = models.CharField(max_length=40, validators=[MinLengthValidator(2)])
@@ -88,7 +82,7 @@ class Casal(models.Model):
 
     cpf_marido = models.ForeignKey(MembroIgreja, on_delete=models.CASCADE, related_name='marido')
     cpf_esposa = models.ForeignKey(MembroIgreja, on_delete=models.CASCADE, related_name='esposa')
-    id = models.CharField(max_length=22, primary_key=True)  # 11 para cpf_marido and 11 para cpf_esposa
+  # 11 para cpf_marido and 11 para cpf_esposa
     data_casamento = models.DateField()
     status_casal_ecc = models.CharField(max_length=7, choices=STATUS_CASAL_ECC)
     status_matrimonio = models.CharField(max_length=10, choices=STATUS_MATRIMONIO)
@@ -105,7 +99,6 @@ class EquipeDirigente(models.Model):
 
     cpf_marido = models.ForeignKey(MembroIgreja, on_delete=models.CASCADE, related_name='marido_dirigente')
     cpf_esposa = models.ForeignKey(MembroIgreja, on_delete=models.CASCADE, related_name='esposa_dirigente')
-    id = models.CharField(max_length=22, primary_key=True)  # 11 para cpf_marido e 11 para cpf_esposa
     status = models.CharField(max_length=7, choices=STATUS_CHOICES)
     senha = models.CharField(max_length=512, null=False)
     data_registro = models.DateTimeField(auto_now_add=True)
@@ -113,7 +106,6 @@ class EquipeDirigente(models.Model):
 
 
 class Evento(models.Model):
-    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, null=False)
     equipe_criadora = models.ForeignKey(EquipeDirigente, on_delete=models.CASCADE)
     data_registro = models.DateTimeField(auto_now_add=True)
@@ -122,7 +114,6 @@ class Evento(models.Model):
 
 
 class EquipeEvento(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     nome = models.CharField(max_length=60, null=False)
     equipe_criadora = models.ForeignKey(EquipeDirigente, on_delete=models.CASCADE)
     quantidade_membros = models.IntegerField(null=False)
@@ -133,7 +124,6 @@ class EquipeEvento(models.Model):
 
 
 class EdicaoEvento(models.Model):
-    id = models.DateTimeField(auto_now_add=True, primary_key=True)
     nome = models.CharField(max_length=60, null=True)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     equipe_dirigente = models.ForeignKey(EquipeDirigente, on_delete=models.CASCADE)
@@ -141,7 +131,6 @@ class EdicaoEvento(models.Model):
 
 
 class ConviteEvento(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     casal = models.ForeignKey('Casal', on_delete=models.CASCADE)
     equipe_evento = models.ForeignKey('EquipeEvento', on_delete=models.CASCADE)
     STATUS_CHOICES = [
@@ -156,7 +145,6 @@ class ConviteEvento(models.Model):
 
 
 class Habilidade(models.Model):
-    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=60)
     equipe_evento = models.ForeignKey('EquipeEvento', on_delete=models.CASCADE)
     data_criacao = models.DateTimeField(auto_now_add=True)
@@ -165,13 +153,11 @@ class Habilidade(models.Model):
 
 
 class CasalHabilidade(models.Model):
-    id = models.AutoField(primary_key=True)
     casal = models.ForeignKey('Casal', on_delete=models.CASCADE)
     habilidade = models.ForeignKey('Habilidade', on_delete=models.CASCADE)
 
 
 class CasalEdicaoEvento(models.Model):
-    id = models.AutoField(primary_key=True)
     casal = models.ForeignKey('Casal', on_delete=models.CASCADE)
     edicao_evento = models.ForeignKey('EdicaoEvento', on_delete=models.CASCADE)
     equipe_evento = models.ForeignKey('EquipeEvento', on_delete=models.CASCADE)
