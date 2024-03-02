@@ -1,0 +1,16 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+</head>
+<body>
+    <h1>Bem-vindo à Página Inicial</h1>
+    <a class="dropdown-item" href="{% url 'logout' %}"> sair</a>
+    <h2>Links para os Formulários de Registro:</h2>
+    {% include 'mensagens.html' %}
+</body>
+</html>
