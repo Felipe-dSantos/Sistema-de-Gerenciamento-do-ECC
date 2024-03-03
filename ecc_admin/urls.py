@@ -7,4 +7,5 @@ urlpatterns = [
     path('login/', include('contas.urls')),
     path('home/', views.home, name='home'),
     path('evento/cadastro', views.cadastro_evento, name='cadastro_evento'),
+    path('evento/<int:pk>', views.evento_detalhe, name='detalhes_evento'),
 ]
