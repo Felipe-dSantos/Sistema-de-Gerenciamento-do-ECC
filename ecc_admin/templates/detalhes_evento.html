@@ -9,5 +9,6 @@
     <h1>Detalhes do Evento</h1>
     <p>Edição: {{evento.num_edicao}}</p>
     <p>Ano: {{evento.ano_edicao}}</p>
+    <a href="{% url 'editar_evento' evento.pk %}">Editar</a>
 </body>
 </html>
