@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from uuid import uuid4
@@ -106,11 +107,10 @@ class EquipeDirigente(models.Model):
 
 
 class Evento(models.Model):
-    nome = models.CharField(max_length=100, null=False)
-    equipe_criadora = models.ForeignKey(EquipeDirigente, on_delete=models.CASCADE)
-    data_registro = models.DateTimeField(auto_now_add=True)
-    data_atualizacao = models.DateTimeField(auto_now=True)
-
+    num_edicao = models.IntegerField()
+    ano_edicao = models.DateField()
+    data_registro = models.DateTimeField(default=timezone.now)
+    data_atualizacao = models.DateTimeField(default=timezone.now)
 
 
 class EquipeEvento(models.Model):
