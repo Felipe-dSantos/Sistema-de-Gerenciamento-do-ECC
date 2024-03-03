@@ -32,3 +32,7 @@ def editar_evento(request, pk):
     else: 
         form = EventoForm(instance=evento)
     return render(request, 'editar_evento.html', {'form': form})
+
+def listar_evento(request):
+    eventos = Evento.objects.all()
+    return render(request, 'lista_eventos.html', {'eventos': eventos})
