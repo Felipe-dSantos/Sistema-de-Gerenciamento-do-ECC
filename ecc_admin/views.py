@@ -36,3 +36,8 @@ def editar_evento(request, pk):
 def listar_evento(request):
     eventos = Evento.objects.all()
     return render(request, 'lista_eventos.html', {'eventos': eventos})
+
+def deletar_evento(request, pk):
+    evento = get_object_or_404(Evento, pk = pk)
+    evento.delete()
+    return redirect('listar_evento')
