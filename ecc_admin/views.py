@@ -148,6 +148,13 @@ class EquipeEventoCreateView(CreateView):
         return super().form_valid(form)
 
 
+class ListaEquipesView(ListView):
+    model = EquipeEvento
+    template_name = 'listaequipes.html'
+    context_object_name = 'equipes'
+
+
+
 class CasalEditView(UpdateView):
     model = Casal
     form_class = CasalEditForm
