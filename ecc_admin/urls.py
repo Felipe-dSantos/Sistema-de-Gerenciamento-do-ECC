@@ -14,6 +14,7 @@ urlpatterns = [
     path('evento/<int:pk>/deletar', views.deletar_evento, name='deletar_evento'),
     path('cadastro_equipe_evento/', EquipeEventoCreateView.as_view(), name='cadastro_equipe_evento'),
     path('equipes/', ListaEquipesView.as_view(), name='listaequipes'),
+    path('deletarequipe/<int:pk>', DeletarEquipeView.as_view(), name='deletarequipe'),
     path('deletarcasal/<int:pk>', DeletarCasalView.as_view(), name='deletarcasal'),
     path('casais/', ListaCasaisView.as_view(), name='casais'),
     path('cadastrocasal/', CasalCreateView.as_view(), name='cadastrocasal'),

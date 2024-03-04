@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +60,7 @@
     <div class="btn-container">
         <a href="{% url 'casais' %}" class="btn btn-header">Casais</a>
         <a href="{% url 'listar_evento' %}" class="btn btn-header">Eventos</a>
-        <a href="{% url 'cadastro_equipe_evento' %}" class="btn btn-header">Equipes</a>
+        <a href="{% url 'listaequipes' %}" class="btn btn-header">Equipes</a>
     </div>
 </div>
 
@@ -80,9 +79,31 @@
           {{ equipe.nome }}
           <div class="btn-group" role="group" aria-label="Ações">
             <a href="#" class="btn btn-info">Editar</a>
-            <a href="#" class="btn btn-danger">Deletar</a>
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirmarDelecao{{ equipe.pk }}">Deletar</a>
           </div>
         </li>
+      <!-- Modal de Confirmação de Deleção -->
+      <div class="modal fade" id="confirmarDelecao{{ equipe.pk }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="modalLabel">Confirmar Deleção</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p>Tem certeza que deseja deletar esta equipe?</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <a href="{% url 'deletarequipe' equipe.pk %}" class="btn btn-danger" data-target="#sucessoDelecao{{ equipe.pk }}">Deletar</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
       {% endfor %}
     </ul>
   </div>

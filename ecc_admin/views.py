@@ -141,7 +141,7 @@ class EquipeEventoCreateView(CreateView):
     model = EquipeEvento
     form_class = EquipeEventoForm
     template_name = 'cadastro_equipe_evento.html'
-    success_url = reverse_lazy('casais')
+    success_url = reverse_lazy('listaequipes')
 
     def form_valid(self, form):
         self.object = form.save()
@@ -154,6 +154,21 @@ class ListaEquipesView(ListView):
     context_object_name = 'equipes'
 
 
+class DeletarEquipeView(DeleteView):
+    model = EquipeEvento
+    template_name = 'deletarequipe.html'
+    success_url = reverse_lazy('listaequipes')
+
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            self.object.delete()
+        
+            return HttpResponseRedirect(self.get_success_url())
+        except Exception as e:
+            print("OI")
+            return JsonResponse({'success': False, 'error_message': str(e)})
 
 class CasalEditView(UpdateView):
     model = Casal
