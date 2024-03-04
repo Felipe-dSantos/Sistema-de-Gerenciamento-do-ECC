@@ -201,6 +201,36 @@
     $('#' + prevStepId).show();
     $('#' + prevStepId).siblings('.step').hide();
   }
+  document.addEventListener("DOMContentLoaded", function () {
+    const cep = document.getElementById("id_cep");
+
+    cep.addEventListener("blur", function () {
+        const apiUrl = "https://brasilapi.com.br/api/cep/v2/" + cep.value
+
+        fetch(apiUrl)
+            .then(response => {
+                // Verifica se a resposta foi bem-sucedida
+                if (!response.ok) {
+                    throw new Error("Erro na requisição da API: " + response.statusText);
+                }
+                // Converte a resposta para JSON
+                return response.json();
+            })
+            .then(data => {
+                // Ação a ser executada com os dados da API
+                document.querySelector('#id_bairro').value = data.neighborhood
+                document.querySelector('#id_rua').value = data.street
+                document.querySelector('#id_numero_residencial').focus()
+                
+                // Você pode adicionar mais ações ou chamadas de função aqui
+            })
+            .catch(error => {
+                // Tratamento de erros
+                console.error("Erro na requisição da API:", error);
+            });
+    });
+  });
+
 </script>
 
 </body>
