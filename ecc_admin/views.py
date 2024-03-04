@@ -170,6 +170,14 @@ class DeletarEquipeView(DeleteView):
             print("OI")
             return JsonResponse({'success': False, 'error_message': str(e)})
 
+
+class EditarEquipeEventoView(UpdateView):
+    model = EquipeEvento
+    form_class = EquipeEventoForm
+    template_name = 'editarequipe.html'
+    success_url = reverse_lazy('listaequipes')
+
+
 class CasalEditView(UpdateView):
     model = Casal
     form_class = CasalEditForm

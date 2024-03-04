@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Casais</title>
+    <title>Lista de Equipes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
         /* Personalize o estilo conforme necessário */
@@ -78,7 +78,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-center">
           {{ equipe.nome }}
           <div class="btn-group" role="group" aria-label="Ações">
-            <a href="#" class="btn btn-info">Editar</a>
+            <a href="{% url 'editarequipe' pk=equipe.pk %}" class="btn btn-info">Editar</a>
             <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirmarDelecao{{ equipe.pk }}">Deletar</a>
           </div>
         </li>

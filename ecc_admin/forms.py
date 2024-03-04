@@ -97,3 +97,10 @@ class ContatoForm(forms.ModelForm):
         model = Contato
         fields = '__all__'
 
+
+class EquipeEventoForm(forms.ModelForm):
+    class Meta:
+        model = EquipeEvento
+        fields = '__all__'
+
+

@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Casais - Sistema de Gerenciamento de ECC</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+            margin-top: 20px;
+            min-height: 600px;
+        }
+        .container form {
+            max-width: 50%;
+            margin: 0 auto;
+        }
+        .container form * {
+          width: 100%;
+        }
+        .container form label {
+          font-size: 11pt;
+        }
+        .header {
+            background-color: #008cba;
+            padding: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: #ffffff;
+        }
+        .logo {
+          color: white;
+          font-size: 19px;
+          padding: 0;
+        }
+        .logo:hover{ color: white;  }
+        .btn-header { color: white;  }
+        .step input {
+          height: 34px;
+          font-size: 12pt;
+        }
+        .step {
+            margin-top: 20px;
+        }
+        .form-btn {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3px;
+        }
+        .form-btn button {
+          height: 50px;
+        }
+        .btn-primary {
+            background-color: #008cba;
+            border-color: #008cba;
+            grid-column-end: 3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+  <h1><a href="{% url 'home' %}" class="btn logo">Sistema de Gerenciamento de ECC</a></h1>
+    <div class="btn-container">
+        <a href="{% url 'casais' %}" class="btn btn-header">Casais</a>
+        <a href="{% url 'listar_evento' %}" class="btn btn-header">Eventos</a>
+        <a href="{% url 'listaequipes' %}" class="btn btn-header">Equipes</a>
+    </div>
+</div>
+
+<div class="container mt-5">
+{% block content %}
+    <h2>Editar Equipe</h2>
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+{% endblock %}
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+  function nextStep(nextStepId) {
+    $('#' + nextStepId).show();
+    $('#' + nextStepId).siblings('.step').hide();
+  }
+
+  function prevStep(prevStepId) {
+    $('#' + prevStepId).show();
+    $('#' + prevStepId).siblings('.step').hide();
+  }
+</script>
+
+</body>
+</html>
+
