@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import EventoForm
 from .models import Evento
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import TemplateView, ListView
 from django.views import View
 from django.http import JsonResponse, HttpResponseRedirect
@@ -135,29 +135,77 @@ class DeletarCasalView(DeleteView):
         except Exception as e:
             print("OI")
             return JsonResponse({'success': False, 'error_message': str(e)})
-'''
-    def delete(self, request, *args, **kwargs):
-        try:
-            self.object = self.get_object()
-            self.object.delete()
-        
-            return HttpResponseRedirect(self.get_success_url())
-#            response = super().delete(request, *args, **kwargs)
-#            return JsonResponse({'success': True, 'redirect': self.success_url})
-#            return super().delete(request, *args, **kwargs)
-          #  response = super().delete(request, *args, **kwargs)
-          #  return response
-        except Exception as e:
-            print("OI")
-            return JsonResponse({'success': False, 'error_message': str(e)})
-'''
+
 
 class EquipeEventoCreateView(CreateView):
     model = EquipeEvento
     form_class = EquipeEventoForm
     template_name = 'cadastro_equipe_evento.html'
-    sucess_url = reverse_lazy('casais')
+    success_url = reverse_lazy('casais')
 
     def form_valid(self, form):
         self.object = form.save()
         return super().form_valid(form)
+
+
+class CasalEditView(UpdateView):
+    model = Casal
+    form_class = CasalEditForm
+    template_name = 'editarcasal.html'
+    success_url = reverse_lazy('casais')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        contatos_casal = Contato.objects.filter(casal=self.object)
+        context['contatos'] = [ContatoForm(instance=contato, prefix=f'contato_casal_{contato.id}') for contato in contatos_casal]
+        #context['contatos'] = Contato.objects.filter(casal=self.object)
+        return context
+
+    def form_valid(self, form):
+        # Processa o formulário principal (Casal)
+        self.object = form.save()
+
+        # Processa os formulários de Contato
+        for key, value in self.request.POST.items():
+            if key.startswith('contato_casal_'):
+                contato_id = int(key.split('_')[-1].split('-')[0])
+                contato = Contato.objects.get(id=contato_id)
+                contato_form = ContatoForm(self.request.POST, instance=contato, prefix=contato_id)
+
+                if contato_form.is_valid():
+                    print("ooooooooooooooooooooooooooooooooooooooooooooo")
+                    contato_form.save()
+
+        return super().form_valid(form)
+
+
+'''
+class CasalEditView(UpdateView):
+    model = Casal
+    form_class = CasalEditForm
+    template_name = 'editarcasal.html'
+    success_url = reverse_lazy('casais')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        contatos_marido = Contato.objects.filter(casal=self.object, tipo_contato='MARIDO')
+        contatos_mulher = Contato.objects.filter(casal=self.object, tipo_contato='MULHER')
+        context['contatos_marido'] = [ContatoForm(instance=contato, prefix=f'contato_marido_{contato.id}') for contato in contatos_marido]
+        context['contatos_mulher'] = [ContatoForm(instance=contato, prefix=f'contato_mulher_{contato.id}') for contato in contatos_mulher]
+        return context
+
+    def form_valid(self, form):
+        # Processa o formulário principal (Casal)
+        self.object = form.save()
+
+        # Processa os formulários de Contato
+        for key, value in self.request.POST.items():
+            if key.startswith('contato_marido_') or key.startswith('contato_mulher_'):
+                contato_id = int(key.split('_')[-1])
+                contato = Contato.objects.get(id=contato_id)
+                contato_form = ContatoForm(self.request.POST, instance=contato, prefix=key)
+                if contato_form.is_valid():
+                    contato_form.save()
+
+        return super().form_valid(form)
+'''

@@ -85,3 +85,15 @@ class HabilidadeForm(forms.ModelForm):
         if commit:
             habilidade.save()
         return habilidade
+
+class CasalEditForm(forms.ModelForm):
+    class Meta:
+        model = Casal
+        fields = '__all__'
+
+
+class ContatoForm(forms.ModelForm):
+    class Meta:
+        model = Contato
+        fields = '__all__'
+

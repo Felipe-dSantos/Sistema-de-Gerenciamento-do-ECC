@@ -9,6 +9,27 @@
         body {
             background-color: #f8f9fa;
         }
+        .header {
+            background-color: #008cba;
+            padding: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: #ffffff;
+        }
+        .logo {
+          color: white;
+          font-size: 19px;
+          padding: 0;
+        }
+        .logo:hover{ color: white;  }
+        .btn-header { color: white;  }
+ 
         .container {
             background-color: #fff;
             border-radius: 8px;
@@ -54,8 +75,18 @@
     </style>
 </head>
 <body>
+<div class="header">
+  <h1><a href="{% url 'home' %}" class="btn logo">Sistema de Gerenciamento de ECC</a></h1>
+    <div class="btn-container">
+        <a href="{% url 'casais' %}" class="btn btn-header">Casais</a>
+        <a href="{% url 'listar_evento' %}" class="btn btn-header">Eventos</a>
+        <a href="{% url 'cadastro_equipe_evento' %}" class="btn btn-header">Equipes</a>
+    </div>
+</div>
+
 
 <div class="container mt-5">
+  <h3>Cadastrar Equipe</h3>
 
   {% block content %}
       <form method="post" action="{% url 'cadastro_equipe_evento' %}">

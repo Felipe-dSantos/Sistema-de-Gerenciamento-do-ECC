@@ -16,4 +16,5 @@ urlpatterns = [
     path('deletarcasal/<int:pk>', DeletarCasalView.as_view(), name='deletarcasal'),
     path('casais/', ListaCasaisView.as_view(), name='casais'),
     path('cadastrocasal/', CasalCreateView.as_view(), name='cadastrocasal'),
+    path('casal/editar/<int:pk>/', CasalEditView.as_view(), name='editarcasal'),
 ]
