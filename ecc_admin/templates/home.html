@@ -11,6 +11,9 @@
     <h1>Bem-vindo à Página Inicial</h1>
     <a class="dropdown-item" href="{% url 'logout' %}"> sair</a>
     <h2>Links para os Formulários de Registro:</h2>
+    <a href="{% url 'casais' %}" class="btn">CASAIS</a>
+    <a href="{% url 'listar_evento' %}" class="btn">EVENTOS</a>
+    <a href="{% url 'casais' %}" class="btn">EQUIPES</a>
     {% include 'mensagens.html' %}
 </body>
 </html>

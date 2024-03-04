@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+            margin-top: 20px;
+            min-height: 600px;
+        }
+        .container form {
+            max-width: 50%;
+            margin: 0 auto;
+        }
+        .container form * {
+          width: 100%;
+        }
+        .container form label {
+          font-size: 11pt;
+        }
+        .step input {
+          height: 34px;
+          font-size: 12pt;
+        }
+        .step {
+            margin-top: 20px;
+        }
+        .form-btn {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3px;
+        }
+        .form-btn button {
+          height: 50px;
+        }
+        .btn-primary {
+            background-color: #008cba;
+            border-color: #008cba;
+            grid-column-end: 3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <form method="post" action="{% url 'cadastrocasal' %}">
+        {% csrf_token %}
+        <div id="1" class="step">
+            <!-- Passo 1: Informações do Marido e Contato -->
+            {{ form.primeiro_nome_marido.label_tag }}</br> 
+            {{ form.primeiro_nome_marido }}
+            </br></br>
+            {{ form.sobrenome_marido.label_tag }}</br> 
+            {{ form.sobrenome_marido }}
+            </br></br>
+            {{ form.cpf_marido.label_tag }}</br>
+            {{ form.cpf_marido }}
+
+            </br></br>
+            {{ form.nascimento_marido.label_tag }}</br>
+            {{ form.nascimento_marido }}
+            </br></br>
+            {{ contato_marido_form.telefone.label_tag }}</br>
+            {{ contato_marido_form.telefone }}
+            </br></br>
+            {{ contato_marido_form.email.label_tag }}</br>
+            {{ contato_marido_form.email }}
+            </br></br>
+
+            <div class="form-btn">
+                <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
+            </div>
+        </div>
+
+        <div id="2" class="step" style="display:none;">
+            <!-- Passo 2: Informações da Mulher -->
+            {{ form.primeiro_nome_mulher.label_tag }}</br> 
+            {{ form.primeiro_nome_mulher }}
+            </br></br>
+            {{ form.sobrenome_mulher.label_tag }}</br> 
+            {{ form.sobrenome_mulher }}
+            </br></br>
+            {{ form.cpf_mulher.label_tag }}</br>
+            {{ form.cpf_mulher }}
+
+            </br></br>
+            {{ form.nascimento_mulher.label_tag }}</br>
+            {{ form.nascimento_mulher }}
+            </br></br>
+            {{ contato_mulher_form.telefone.label_tag }}</br>
+            {{ contato_mulher_form.telefone }}
+            </br></br>
+            {{ contato_mulher_form.email.label_tag }}</br>
+            {{ contato_mulher_form.email }}
+            </br></br>
+
+            <div class="form-btn">
+                <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep(3)">Próximo</button>
+            </div>
+        </div>
+
+        <div id="3" class="step" style="display:none;">
+            <!-- Passo 3: Informações da Mulher -->
+            {{ form.status_casal_ecc.label_tag }}</br> 
+            {{ form.status_casal_ecc }}
+            </br></br>
+            {{ form.status_matrimonio.label_tag }}</br> 
+            {{ form.status_matrimonio }}
+            </br></br>
+            {{ form.data_casamento.label_tag }}</br>
+            {{ form.data_casamento }}
+            </br></br>
+
+            <div class="form-btn">
+                <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep(4)">Próximo</button>
+            </div>
+        </div>
+
+
+
+        <div id="4" class="step step" style="display:none;">
+            <!-- Passo 3: Informações de Endereço -->
+            {{ form.cep.label_tag }}</br>
+            {{ form.cep }}
+            </br></br>
+            {{ form.bairro.label_tag }}</br>
+            {{ form.bairro }}
+            </br></br>
+            {{ form.rua.label_tag }}</br>
+            {{ form.rua }}
+            </br></br>
+            {{ form.numero_residencial.label_tag }}</br>
+            {{ form.numero_residencial }}
+            </br></br>
+            {{ form.referencia.label_tag }}</br>
+            {{ form.referencia }}
+            </br></br>
+
+            <div class="form-btn">
+                <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Voltar</button>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+  function nextStep(nextStepId) {
+    $('#' + nextStepId).show();
+    $('#' + nextStepId).siblings('.step').hide();
+  }
+
+  function prevStep(prevStepId) {
+    $('#' + prevStepId).show();
+    $('#' + prevStepId).siblings('.step').hide();
+  }
+</script>
+
+</body>
+</html>
+
