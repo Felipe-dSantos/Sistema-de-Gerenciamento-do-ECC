@@ -11,6 +11,27 @@
         body {
             background-color: #f8f9fa;
         }
+        .header {
+            background-color: #008cba;
+            padding: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: #ffffff;
+        }
+        .logo {
+          color: white;
+          font-size: 19px;
+          padding: 0;
+        }
+        .btn-header { color: white;  }
+        .logo:hover{ color: white;  }
+
         .container {
             margin-top: 50px;
         }
@@ -21,15 +42,34 @@
             justify-content: space-between;
             align-items: center;
         }
+        .btn-cadastrar {
+            background-color: #28a745; /* Verde Bootstrap */
+            color: #ffffff;
+        }
+        .container-cadastrar {
+          display: flex;
+          justify-content: right;
+        }
+        .btn-cadastrar:hover { color: white;  }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Lista de Casais</h2>
-    
+<div class="header">
+  <h1><a href="{% url 'home' %}" class="btn logo">Sistema de Gerenciamento de ECC</a></h1>
+    <div class="btn-container">
+        <a href="{% url 'casais' %}" class="btn btn-header">Casais</a>
+        <a href="#" class="btn btn-header">Eventos</a>
+        <a href="#" class="btn btn-header">Equipes</a>
+    </div>
+</div>
 
-    <a class="btn btn-sucess" href="{% url 'cadastrocasal'%}"> cadastra casal</a>
+<div class="container">
+    <h2>Casais</h2>
+    
+    <div class="container-cadastrar">
+      <a class="btn btn-cadastrar" href="{% url 'cadastrocasal'%}">+ cadastrar casal</a>
+    </div>
     <hr>
     
     {% for casal in casais %}
@@ -68,7 +108,7 @@
             </div>
         </div>
         <!-- Modal de Sucesso -->
-        <div class="modal fade" id="sucessoDelecao{{ casal.pk }}" tabindex="-1" role="dialog" aria-labelledby="sucessoLabel" aria-hidden="true">
+        <!--<div class="modal fade" id="sucessoDelecao{{ casal.pk }}" tabindex="-1" role="dialog" aria-labelledby="sucessoLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -82,7 +122,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
     {% endfor %}
     

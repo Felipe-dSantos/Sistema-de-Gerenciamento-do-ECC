@@ -5,7 +5,7 @@ from .models import Evento
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic import TemplateView, ListView
 from django.views import View
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from .models import *
 from .forms import *
@@ -122,21 +122,35 @@ class ListaCasaisView(ListView):
 
 class DeletarCasalView(DeleteView):
     model = Casal
-    template_name = 'void.html'
+    template_name = 'deletarcasal.html'
     success_url = reverse_lazy('casais')
 
 
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            self.object.delete()
+        
+            return HttpResponseRedirect(self.get_success_url())
+        except Exception as e:
+            print("OI")
+            return JsonResponse({'success': False, 'error_message': str(e)})
+'''
     def delete(self, request, *args, **kwargs):
         try:
-            response = super().delete(request, *args, **kwargs)
-            return JsonResponse({'success': True, 'redirect': self.success_url})
+            self.object = self.get_object()
+            self.object.delete()
+        
+            return HttpResponseRedirect(self.get_success_url())
+#            response = super().delete(request, *args, **kwargs)
+#            return JsonResponse({'success': True, 'redirect': self.success_url})
 #            return super().delete(request, *args, **kwargs)
           #  response = super().delete(request, *args, **kwargs)
           #  return response
         except Exception as e:
             print("OI")
             return JsonResponse({'success': False, 'error_message': str(e)})
-
+'''
 
 class EquipeEventoCreateView(CreateView):
     model = EquipeEvento

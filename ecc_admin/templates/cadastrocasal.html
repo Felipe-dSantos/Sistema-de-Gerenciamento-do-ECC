@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Cadastro</title>
+    <title>Cadastrar Casais - Sistema de Gerenciamento de ECC</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
         body {
@@ -27,6 +27,26 @@
         .container form label {
           font-size: 11pt;
         }
+        .header {
+            background-color: #008cba;
+            padding: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: #ffffff;
+        }
+        .logo {
+          color: white;
+          font-size: 19px;
+          padding: 0;
+        }
+        .logo:hover{ color: white;  }
+        .btn-header { color: white;  }
         .step input {
           height: 34px;
           font-size: 12pt;
@@ -54,6 +74,14 @@
     </style>
 </head>
 <body>
+<div class="header">
+  <h1><a href="{% url 'home' %}" class="btn logo">Sistema de Gerenciamento de ECC</a></h1>
+    <div class="btn-container">
+        <a href="{% url 'casais' %}" class="btn btn-header">Casais</a>
+        <a href="#" class="btn btn-header">Eventos</a>
+        <a href="#" class="btn btn-header">Equipes</a>
+    </div>
+</div>
 
 <div class="container mt-5">
     <form method="post" action="{% url 'cadastrocasal' %}">
