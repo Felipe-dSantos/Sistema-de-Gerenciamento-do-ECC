@@ -1,17 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ECC Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #008cba;
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 100px;
+        }
+        .container {
+          display: flex;
+        }
+        .welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .welcome h2 {
+            font-family: "Oleo Script", system-ui;
+            font-style: normal;
+            font-size: 67px;
+        }
+        .welcome p {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            height: calc(100vh - 140px);
+        }
+        .login-box {
+            text-align: center;
+        }
+        .login-box h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 50px;
+            color: #333;
+        }
+        .login-box input {
+            width: 300px;
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Login</h2>
-    {% include 'mensagens.html' %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Entrar</button>
-        <span class="text-center">Não é cadastrado no sistema?<a
-            href="{% url 'cadastro_usuario' %}">Cadastre-se</a></span>
-    </form>
+
+<div class="container">
+  <div class="welcome">
+      <div>
+          <h2>Seja Bem-Vindo!</h2>
+          <p>Vamos caminhar juntos</p>
+          <p>em uma jornada de fé e companheirismo.</p>
+      </div>
+  </div>
+
+  <div class="login-container">
+      <div class="login-box">
+          {% if error %}
+          <p style="color: red;">{{ error }}</p>
+          {% endif %}
+
+          <h2>Login</h2>
+          <form method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+              <input type="text" name="username" placeholder="Usuário" required>
+              <br>
+              <input type="password" name="password" placeholder="Senha" required>
+              <br>
+              <button type="submit" class="btn btn-primary">Entrar</button>
+          </form>
+      </div>
+  </div>
+</div>
+
 </body>
 </html>
+

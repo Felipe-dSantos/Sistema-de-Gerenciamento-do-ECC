@@ -88,13 +88,14 @@
 <div class="container mt-5">
   <h3>Cadastrar Equipe</h3>
 
-  <form method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <div class="form-btn">
-        <button type="submit" class="btn btn-primary">Enviar</button>
-      </div>
-  </form>
+  {% block content %}
+      <form method="post" action="{% url 'cadastro_equipe_evento' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+          <button type="submit" class="btn btn-success">Cadastrar</button>
+      </form>
+  {% endblock %}
 
 </div>
 
@@ -104,5 +105,4 @@
 
 </body>
 </html>
-
 

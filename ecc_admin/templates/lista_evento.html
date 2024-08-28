@@ -72,6 +72,10 @@
             background-color: #6c757d;
             border-color: #6c757d;
         }
+        .btn-cadastrar {
+            background-color: #28a745; /* Verde Bootstrap */
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -86,15 +90,13 @@
 
 
 <div class="container mt-5">
-  <h3>Cadastrar Equipe</h3>
-
-  <form method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <div class="form-btn">
-        <button type="submit" class="btn btn-primary">Enviar</button>
-      </div>
-  </form>
+  <h3>Eventos</h3>
+  <a href="{% url 'cadastro_evento' %}" class="btn ">Cadastrar Evento</a>
+  <ul>
+        {% for evento in eventos %}
+            <li><a href="{% url 'detalhes_evento' evento.pk %}">{{evento.num_edicao}} ecc</a></li>
+        {% endfor %}
+  </ul>
 
 </div>
 

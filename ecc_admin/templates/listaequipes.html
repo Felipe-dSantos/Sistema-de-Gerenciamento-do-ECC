@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Equipes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        /* Personalize o estilo conforme necessário */
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #008cba;
+            padding: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: #ffffff;
+        }
+        .logo {
+          color: white;
+          font-size: 19px;
+          padding: 0;
+        }
+        .btn-header { color: white;  }
+        .logo:hover{ color: white;  }
+
+        .container {
+            margin-top: 50px;
+        }
+        .casal-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-cadastrar {
+            background-color: #28a745; /* Verde Bootstrap */
+            color: #ffffff;
+        }
+        .container-cadastrar {
+          display: flex;
+          justify-content: right;
+        }
+        .btn-cadastrar:hover { color: white;  }
+        .btn { border-radius: 5px;  }
+    </style>
+</head>
+<body>
+
+<div class="header">
+  <h1><a href="{% url 'home' %}" class="btn logo">Sistema de Gerenciamento de ECC</a></h1>
+    <div class="btn-container">
+        <a href="{% url 'casais' %}" class="btn btn-header">Casais</a>
+        <a href="{% url 'listar_evento' %}" class="btn btn-header">Eventos</a>
+        <a href="{% url 'listaequipes' %}" class="btn btn-header">Equipes</a>
+    </div>
+</div>
+
+<div class="container">
+{% block content %}
+  <div class="container mt-4">
+    <h2>Equipes</h2>
+      <div class="container-cadastrar">
+        <a class="btn btn-cadastrar" href="{% url 'cadastro_equipe_evento'%}">+ cadastrar equipe</a>
+      </div>
+      <hr>
+   
+    <ul class="list-group">
+      {% for equipe in equipes %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ equipe.nome }}
+          <div class="btn-group" role="group" aria-label="Ações">
+            <a href="{% url 'editarequipe' pk=equipe.pk %}" class="btn btn-info">Editar</a>
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirmarDelecao{{ equipe.pk }}">Deletar</a>
+          </div>
+        </li>
+      <!-- Modal de Confirmação de Deleção -->
+      <div class="modal fade" id="confirmarDelecao{{ equipe.pk }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="modalLabel">Confirmar Deleção</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p>Tem certeza que deseja deletar esta equipe?</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <a href="{% url 'deletarequipe' equipe.pk %}" class="btn btn-danger" data-target="#sucessoDelecao{{ equipe.pk }}">Deletar</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+   
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
